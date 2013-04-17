@@ -10,7 +10,7 @@
 
     <groupId>com.belerweb</groupId>
     <artifactId>qq-connect</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>QQ Connect</name>
@@ -75,40 +75,32 @@
             <artifactId>jackson-xc</artifactId>
             <version>1.9.12</version>
         </dependency>
-        <dependency>
-            <groupId>com.qq</groupId>
-            <artifactId>qq-connect</artifactId>
-            <version>${project.version}</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Sdk4J.jar</systemPath>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>assembly.xml</descriptor>
-                    </descriptors>
-                    <appendAssemblyId>false</appendAssemblyId>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
                 <executions>
                     <execution>
+                        <id>unzip-sdk4j</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <target>
+                                <unzip src="lib/Sdk4J.jar" dest="${project.build.outputDirectory}">
+                                    <patternset>
+                                        <include name="com/**" />
+                                    </patternset>
+                                </unzip>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>copy-sdk4jdoc</id>
                         <phase>package</phase>
                         <configuration>
                             <target>
@@ -131,6 +123,19 @@
                     <configuration>
                         <lifecycleMappingMetadata>
                             <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-antrun-plugin</artifactId>
+                                        <versionRange>[1.7,)</versionRange>
+                                        <goals>
+                                            <goal>run</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute />
+                                    </action>
+                                </pluginExecution>
                                 <pluginExecution>
                                     <pluginExecutionFilter>
                                         <groupId>org.apache.maven.plugins</groupId>
