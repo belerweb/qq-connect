@@ -91,6 +91,7 @@
                                 <unzip src="lib/Sdk4J.jar" dest="${project.build.outputDirectory}">
                                     <patternset>
                                         <include name="com/**" />
+                                        <exclude name="com/qq/connect/utils/http/MySSLSocketFactory.class" />
                                     </patternset>
                                 </unzip>
                             </target>
