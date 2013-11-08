@@ -1,4 +1,4 @@
-qq-connect
+qq-connect（此项目停止，请移步新项目 https://github.com/belerweb/social-sdk ）
 ==========
 A maven wrapper for **[QQ connect java SDK](http://wiki.opensns.qq.com/wiki/%E3%80%90QQ%E7%99%BB%E5%BD%95%E3%80%91SDK%E4%B8%8B%E8%BD%BD)**.
 
